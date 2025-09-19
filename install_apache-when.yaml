@@ -1,0 +1,33 @@
+- name: Update Repository Index
+  apt:
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: Installing Apache2 Package
+  apt:
+    name: apache2
+  when: ansible_distribution == "Ubuntu"
+
+- name: Add PHP Support for Apache2
+  apt:
+    name: libapache2-mod-php
+  when: ansible_distribution == "Ubuntu"
+
+# added 'when' statement to specify Ubuntu as Linux distro
+
+- name: Update Repository Index (CentOS)
+  dnf:
+    update_cache: yes
+  when: ansible_distribution == "CentOS"
+
+- name: Installing Apache2 Package (CentOS)
+  dnf:
+    name: httpd
+    state: latest
+  when: ansible_distribution == "CentOS"
+
+- name: Add PHP Support for Apache2 (CentOS)
+  dnf:
+    name: php
+    state: latest
+  when: ansible_distribution == "CentOS"
